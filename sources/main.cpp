@@ -13,11 +13,21 @@ double threshold1;
 double threshold2;
 double kernel;
 int userChoice;
+double height;
+double width;
+string directory;
 
 int main() {
 
     cout << "Welcome to our image editor \n What would you like to do with your image ? \n Type in the corresponding number \n 1. Dilatation/Erosion\n 2. Resizing\n 3. Lighten/Darken\n 4. Panorama/Stitching\n 5. Canny edge detection\n 0. Quit"<< endl;
     cin >> userChoice;
+    
+    if (userChoice == 2){
+        cout << "Please enter the desired height for the image" << endl;
+        cin >> height;
+        cout << "Please enter the desired width for the image" << endl;
+        cin >> width;
+        resizing("HappyFish.jpg", height, width);
 
     if (userChoice == 3) {
         cout << "Type 0 if you want to lighten the image, 1 if you want to darken it" << endl;
@@ -33,7 +43,7 @@ int main() {
         }
 
         if (choice == 1) {
-            cout << "Type in the desired darkening factor (between 0 and 256)" << endl;
+            cout << "Type in the desired darkening factor (between 0 and 256) :" << endl;
             cin >> factor;
             while (factor > 256 or factor < 0) {
                 cout << "The factor should be between 0 and 256. Please try again :" << endl;
@@ -43,6 +53,10 @@ int main() {
         }    
     }
     
+    if (userChoice ==4) {
+        cout << "Please type in the directory in which are located the images to stitch :" << endl;
+        cin >> directory;
+        panorama(directory);
 
     if (userChoice == 5) {
         cout << "Canny edge detection \n Please enter the first threshold :" << endl;
