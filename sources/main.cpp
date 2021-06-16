@@ -4,6 +4,8 @@
 #include <string>
 #include "lighten_darken.h"
 #include "canny_edge_detection.h"
+#include "panorama.h"
+#include "resizing.h"
 using namespace std;
 using namespace cv;
 
@@ -19,15 +21,16 @@ string directory;
 
 int main() {
 
-    cout << "Welcome to our image editor \n What would you like to do with your image ? \n Type in the corresponding number \n 1. Dilatation/Erosion\n 2. Resizing\n 3. Lighten/Darken\n 4. Panorama/Stitching\n 5. Canny edge detection\n 0. Quit"<< endl;
+    cout << "Welcome to our image editor \n What would you like to do with your image ? \n Type in the corresponding number \n 1. Dilatation/Erosion\n 2. Resizing\n 3. Lighten/Darken\n 4. Panorama/Stitching\n 5. Canny edge detection\n 0. Quit" << endl;
     cin >> userChoice;
-    
-    if (userChoice == 2){
+
+    if (userChoice == 2) {
         cout << "Please enter the desired height for the image" << endl;
         cin >> height;
         cout << "Please enter the desired width for the image" << endl;
         cin >> width;
-        resizing("HappyFish.jpg", height, width);
+        resizing("HappyFish.jpg", width, height);
+    }
 
     if (userChoice == 3) {
         cout << "Type 0 if you want to lighten the image, 1 if you want to darken it" << endl;
@@ -50,26 +53,28 @@ int main() {
                 cin >> factor;
             }
             lighten_darken("HappyFish.jpg", -factor);
-        }    
+        }
     }
-    
-    if (userChoice ==4) {
+
+    if (userChoice == 4) {
         cout << "Please type in the directory in which are located the images to stitch :" << endl;
         cin >> directory;
         panorama(directory);
 
-    if (userChoice == 5) {
-        cout << "Canny edge detection \n Please enter the first threshold :" << endl;
-        cin >> threshold1;
+        if (userChoice == 5) {
+            cout << "Canny edge detection \n Please enter the first threshold :" << endl;
+            cin >> threshold1;
 
-        cout << "Please enter the second threshold" << endl;
-        cin >> threshold2;
+            cout << "Please enter the second threshold" << endl;
+            cin >> threshold2;
 
-        cout << "Please enter the kernel value" << endl;
-        cin >> kernel;
+            cout << "Please enter the kernel value" << endl;
+            cin >> kernel;
 
-        canny_edge_detection("HappyFish.jpg", threshold1, threshold2, kernel);
+            canny_edge_detection("HappyFish.jpg", threshold1, threshold2, kernel);
+        }
+
+        return 0;
     }
 
-    return 0;
 }
