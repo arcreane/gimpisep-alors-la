@@ -6,6 +6,7 @@
 #include "canny_edge_detection.h"
 #include "panorama.h"
 #include "resizing.h"
+#include <dilataion_erosion.h>
 using namespace std;
 using namespace cv;
 
@@ -23,6 +24,11 @@ int main() {
 
     cout << "Welcome to our image editor \n What would you like to do with your image ? \n Type in the corresponding number \n 1. Dilatation/Erosion\n 2. Resizing\n 3. Lighten/Darken\n 4. Panorama/Stitching\n 5. Canny edge detection\n 0. Quit" << endl;
     cin >> userChoice;
+
+
+    if (userChoice == 1) {
+        dilatation_erosion("HappyFish.jpg");
+    }
 
     if (userChoice == 2) {
         cout << "Please enter the desired height for the image" << endl;
