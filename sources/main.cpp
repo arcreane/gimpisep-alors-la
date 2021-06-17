@@ -20,6 +20,7 @@ int choix;
 double height;
 double width;
 string directory;
+int erodesize;
 
 int main() {
 
@@ -50,7 +51,9 @@ int main() {
 
 
     if (userChoice == 1) {
-        dilatation_erosion(filename);
+        cout << "What size do you want to erode and dilate your image ? \n 3 \n 5 \n 7" << endl;
+        cin >> erodesize;
+        dilatation_erosion(filename, erodesize);
     }
 
     if (userChoice == 2) {
