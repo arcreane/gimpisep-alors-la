@@ -6,7 +6,7 @@
 #include "canny_edge_detection.h"
 #include "panorama.h"
 #include "resizing.h"
-#include "dilataion_erosion.h"
+#include <dilataion_erosion.h>
 using namespace std;
 using namespace cv;
 
@@ -16,18 +16,41 @@ double threshold1;
 double threshold2;
 double kernel;
 int userChoice;
+int choix;
 double height;
 double width;
 string directory;
 
 int main() {
 
-    cout << "Welcome to our image editor \n What would you like to do with your image ? \n Type in the corresponding number \n 1. Dilatation/Erosion\n 2. Resizing\n 3. Lighten/Darken\n 4. Panorama/Stitching\n 5. Canny edge detection\n 0. Quit" << endl;
+    
+    string filename;
+
+    cout << "Welcome to our image editor \n What image would you like to modify ? \n 1. None \n 2. Happy Fish \n 3. Eco \n 4. Van Gogh"<< endl;
+    cin >> choix;
+
+    if (choix == 1) {
+        return 0;
+    }
+
+    if (choix == 2) {
+        filename = "HappyFish.jpg";
+    }
+
+    if (choix == 3) {
+        filename = "eco.jpg";
+    }
+
+    if (choix == 4) {
+        filename = "van_gogh.jpg";
+    }
+
+    cout << "What would you like to do with your image ? \n Type in the corresponding number \n 1. Dilatation/Erosion\n 2. Resizing\n 3. Lighten/Darken\n 4. Panorama/Stitching\n 5. Canny edge detection\n 0. Quit" << endl;
     cin >> userChoice;
 
 
     if (userChoice == 1) {
-        dilatation_erosion("HappyFish.jpg");
+        dilatation_erosion(filename);
     }
 
     if (userChoice == 2) {
@@ -35,7 +58,7 @@ int main() {
         cin >> height;
         cout << "Please enter the desired width for the image" << endl;
         cin >> width;
-        resizing("HappyFish.jpg", width, height);
+        resizing(filename, width, height);
     }
 
     if (userChoice == 3) {
@@ -48,7 +71,7 @@ int main() {
                 cout << "The factor should be between 0 and 256. Please try again" << endl;
                 cin >> factor;
             }
-            lighten_darken("HappyFish.jpg", factor);
+            lighten_darken(filename, factor);
         }
 
         if (choice == 1) {
@@ -58,7 +81,7 @@ int main() {
                 cout << "The factor should be between 0 and 256. Please try again :" << endl;
                 cin >> factor;
             }
-            lighten_darken("HappyFish.jpg", -factor);
+            lighten_darken(filename, -factor);
         }
     }
 
@@ -77,7 +100,7 @@ int main() {
             cout << "Please enter the kernel value" << endl;
             cin >> kernel;
 
-            canny_edge_detection("HappyFish.jpg", threshold1, threshold2, kernel);
+            canny_edge_detection(filename, threshold1, threshold2, kernel);
         }
 
         return 0;
