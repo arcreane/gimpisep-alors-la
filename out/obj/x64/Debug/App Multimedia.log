@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\gerar\Desktop\AppMultimedia\Projet\gimpisep-alors-la-master\include\canny_edge_detection.h(24,50): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  The contents of <filesystem> are available only with C++17 or later.
+  App Multimedia.vcxproj -> C:\Users\gerar\Desktop\AppMultimedia\Projet\gimpisep-alors-la-master\out\bin\x64\Debug\App Multimedia.exe
