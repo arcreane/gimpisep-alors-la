@@ -6,54 +6,29 @@
 #include "canny_edge_detection.h"
 #include "panorama.h"
 #include "resizing.h"
-#include <dilataion_erosion.h>
+#include "dilatation_erosion.h"
+
 using namespace std;
 using namespace cv;
-
 double factor;
 int choice;
 double threshold1;
 double threshold2;
 double kernel;
 int userChoice;
-int choix;
 double height;
 double width;
 string directory;
-int erodesize;
 
 int main() {
 
-    
-    string filename;
-
-    cout << "Welcome to our image editor \n What image would you like to modify ? \n 1. None \n 2. Happy Fish \n 3. Eco \n 4. Van Gogh"<< endl;
-    cin >> choix;
-
-    if (choix == 1) {
-        return 0;
-    }
-
-    if (choix == 2) {
-        filename = "HappyFish.jpg";
-    }
-
-    if (choix == 3) {
-        filename = "eco.jpg";
-    }
-
-    if (choix == 4) {
-        filename = "van_gogh.jpg";
-    }
-
-    cout << "What would you like to do with your image ? \n Type in the corresponding number \n 1. Dilatation/Erosion\n 2. Resizing\n 3. Lighten/Darken\n 4. Panorama/Stitching\n 5. Canny edge detection\n 0. Quit" << endl;
+    cout << "Welcome to our image editor \n What would you like to do with your image ? \n Type in the corresponding number \n 1. Dilatation/Erosion\n 2. Resizing\n 3. Lighten/Darken\n 4. Panorama/Stitching\n 5. Canny edge detection\n 0. Quit" << endl;
     cin >> userChoice;
 
 
     if (userChoice == 1) {
-        cout << "What size do you want to erode and dilate your image ? \n 3 \n 5 \n 7" << endl;
-        cin >> erodesize;
-        dilatation_erosion(filename, erodesize);
+        dilatation_erosion("HappyFish.jpg");
+        main();
     }
 
     if (userChoice == 2) {
@@ -61,7 +36,8 @@ int main() {
         cin >> height;
         cout << "Please enter the desired width for the image" << endl;
         cin >> width;
-        resizing(filename, width, height);
+        resizing("HappyFish.jpg", width, height);
+        main();
     }
 
     if (userChoice == 3) {
@@ -74,7 +50,8 @@ int main() {
                 cout << "The factor should be between 0 and 256. Please try again" << endl;
                 cin >> factor;
             }
-            lighten_darken(filename, factor);
+            lighten_darken("HappyFish.jpg", factor);
+            main();
         }
 
         if (choice == 1) {
@@ -84,7 +61,8 @@ int main() {
                 cout << "The factor should be between 0 and 256. Please try again :" << endl;
                 cin >> factor;
             }
-            lighten_darken(filename, -factor);
+            lighten_darken("HappyFish.jpg", -factor);
+            main();
         }
     }
 
@@ -92,6 +70,8 @@ int main() {
         cout << "Please type in the directory in which are located the images to stitch :" << endl;
         cin >> directory;
         panorama(directory);
+        main();
+    }
 
         if (userChoice == 5) {
             cout << "Canny edge detection \n Please enter the first threshold :" << endl;
@@ -103,10 +83,13 @@ int main() {
             cout << "Please enter the kernel value" << endl;
             cin >> kernel;
 
-            canny_edge_detection(filename, threshold1, threshold2, kernel);
+            canny_edge_detection("HappyFish.jpg", threshold1, threshold2, kernel);
+            main();
+        }
+
+        if (userChoice == 0) {
+            return 0;
         }
 
         return 0;
     }
-
-}
